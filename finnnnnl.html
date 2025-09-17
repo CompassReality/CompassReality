@@ -1,0 +1,609 @@
+<meta name='viewport' content='width=device-width, initial-scale=1'/><meta name='viewport' content='width=device-width, initial-scale=1'/>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Compass Reality</title>
+  <style>
+    /* General styles */
+    body {
+      margin: 0;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      background-color: #f0f7f4;
+      color: #222;
+      line-height: 1.5;
+    }
+
+    /* Header */
+    .header-container {
+      position: relative;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 1.5em 2em;
+      border-bottom: 2px solid #ccc;
+      background-image: url('https://i.postimg.cc/ydZvny74/ghaziabad-real-estate-or-noida.jpg');
+      background-size: cover;
+      background-position: center;
+      background-repeat: no-repeat;
+      box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+      border-radius: 0 0 14px 14px;
+      color: white;
+      font-weight: bold;
+      font-size: 2em;
+      user-select: none;
+      text-align: center;
+      z-index: 0;
+      min-height: 90px;
+      max-height: 130px;
+    }
+    .header-container::before {
+      content: "";
+      position: absolute;
+      top: 0; left: 0; right: 0; bottom: 0;
+      background-color: rgba(0, 0, 0, 0.45);
+      border-radius: 0 0 14px 14px;
+      z-index: -1;
+    }
+    .logo-text {
+      position: relative;
+      z-index: 1;
+      color: #f5f5f5;
+      text-shadow: 0 0 8px #000000aa;
+      display: inline-flex;
+      align-items: center;
+      gap: 0.3em;
+      user-select: none;
+    }
+    .logo-text .highlight {
+      color: #ffd54f;
+      font-weight: 900;
+      font-style: italic;
+      text-shadow: 0 0 10px #ffd54fcc;
+    }
+
+    /* Navbar */
+    .navbar {
+      background: #263a53;
+      padding: 0.8em 2em;
+      display: flex;
+      justify-content: center;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+      margin-bottom: 1.5em;
+      border-radius: 0 0 12px 12px;
+      font-size: 1.15em;
+    }
+    .navbar ul {
+      list-style: none;
+      display: flex;
+      margin: 0;
+      padding: 0;
+      flex-wrap: wrap;
+      justify-content: center;
+    }
+    .navbar li {
+      margin: 0 1.4em;
+    }
+    .navbar a {
+      color: #ddd;
+      font-weight: 600;
+      padding-bottom: 6px;
+      text-transform: uppercase;
+      letter-spacing: 1.3px;
+      cursor: pointer;
+      position: relative;
+      display: inline-block;
+      text-decoration: none;
+      user-select: none;
+    }
+    .navbar a::after {
+      content: '';
+      position: absolute;
+      width: 0;
+      height: 3px;
+      bottom: 0;
+      left: 0;
+      background-color: #f76707;
+      transition: width 0.3s ease;
+      border-radius: 3px;
+    }
+    .navbar a:hover,
+    .navbar a:focus {
+      color: #f76707;
+      outline: none;
+    }
+    .navbar a:hover::after,
+    .navbar a:focus::after {
+      width: 100%;
+    }
+
+    /* Banner */
+    .banner-image {
+      width: 100%;
+      max-height: 410px;
+      overflow: hidden;
+      border-radius: 0 0 18px 18px;
+      margin-bottom: 3em;
+      box-shadow: 0 8px 15px rgba(0,0,0,0.1);
+    }
+    .banner-image img {
+      width: 100%;
+      object-fit: cover;
+      max-height: 410px;
+      display: block;
+      filter: brightness(0.95);
+      transition: filter 0.3s ease;
+    }
+    .banner-image img:hover {
+      filter: brightness(1);
+    }
+
+    /* Main content */
+    .main {
+      max-width: 1200px;
+      margin: 0 auto 3em;
+      padding: 0 1.5em;
+      color: #222;
+    }
+    .section {
+      margin-bottom: 3em;
+      display: none;
+    }
+    .section.active {
+      display: block;
+    }
+    h1, h2 {
+      color: #263a53;
+      text-shadow: 0 1px 3px #a5b1b8;
+      margin-bottom: 0.5em;
+    }
+
+    /* Property grid */
+    .property-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 1.8em;
+    }
+    .property-card {
+      border: 1px solid #ddd;
+      border-radius: 10px;
+      background: white;
+      box-shadow: 0 2px 8px rgba(38, 58, 83, 0.07);
+      transition: box-shadow 0.3s ease;
+      cursor: default;
+    }
+    .property-card:hover {
+      box-shadow: 0 6px 18px rgba(38, 58, 83, 0.2);
+      transform: translateY(-4px);
+    }
+    .property-image {
+      width: 100%;
+      height: 180px;
+      object-fit: cover;
+      border-bottom: 3px solid #f76707;
+      transition: transform 0.4s ease;
+    }
+    .property-card:hover .property-image {
+      transform: scale(1.05);
+    }
+    .property-info {
+      padding: 1em 1.3em;
+    }
+    .property-title {
+      font-weight: 700;
+      font-size: 1.2em;
+      color: #174d29;
+      margin-bottom: 0.25em;
+      text-transform: uppercase;
+      letter-spacing: 0.8px;
+    }
+    .property-details {
+      font-size: 0.95em;
+      color: #555;
+      margin-bottom: 0.5em;
+      font-style: italic;
+      line-height: 1.4em;
+    }
+    .property-price {
+      font-weight: 700;
+      color: #f76707;
+      font-size: 1.1em;
+      margin-bottom: 0.8em;
+    }
+    .btn-contact {
+      display: inline-block;
+      padding: 0.6em 1.3em;
+      background-color: #f76707;
+      color: white;
+      border-radius: 6px;
+      text-decoration: none;
+      font-weight: 700;
+      transition: background-color 0.3s ease;
+      user-select: none;
+    }
+    .btn-contact:hover {
+      background-color: #d65305;
+    }
+
+    /* Blog styles */
+    .blog-post {
+      margin-bottom: 2.5em;
+      border-bottom: 1px solid #ccc;
+      padding-bottom: 1.5em;
+    }
+    .blog-post h3 {
+      font-weight: 700;
+      color: #174d29;
+      margin-bottom: 0.3em;
+    }
+    .blog-post p {
+      color: #444;
+      margin-bottom: 0.8em;
+      line-height: 1.6em;
+    }
+    .blog-interactions {
+      font-size: 0.9em;
+      color: #555;
+      display: flex;
+      align-items: center;
+      gap: 1.5em;
+      margin-bottom: 0.5em;
+    }
+    .like-btn {
+      cursor: pointer;
+      color: #f76707;
+      font-weight: 700;
+      display: inline-flex;
+      align-items: center;
+      gap: 0.2em;
+      transition: color 0.3s ease;
+      user-select: none;
+    }
+    .like-btn.liked {
+      color: #d04b00;
+    }
+    .comments-section {
+      margin-top: 1em;
+    }
+    .comment-input {
+      width: 100%;
+      padding: 0.5em;
+      font-size: 1em;
+      margin-top: 0.3em;
+      margin-bottom: 0.5em;
+      border: 1px solid #ddd;
+      border-radius: 5px;
+      resize: vertical;
+    }
+    .comments-list {
+      margin-top: 0.8em;
+      list-style: none;
+      padding-left: 0;
+      max-height: 150px;
+      overflow-y: auto;
+      border-top: 1px solid #eee;
+    }
+    .comments-list li {
+      padding: 0.3em 0;
+      border-bottom: 1px solid #f0f0f0;
+      font-size: 0.9em;
+      color: #333;
+    }
+    .btn-add-comment {
+      background-color: #174d29;
+      color: white;
+      border: none;
+      padding: 0.5em 1.2em;
+      border-radius: 5px;
+      cursor: pointer;
+      font-weight: 700;
+      transition: background-color 0.3s ease;
+      user-select: none;
+    }
+    .btn-add-comment:hover {
+      background-color: #0f3218;
+    }
+
+    /* Contact */
+    #contact p {
+      font-size: 1.1em;
+      margin: 0.3em 0;
+    }
+
+    /* Responsive */
+    @media (max-width: 900px) {
+      .header-container {
+        font-size: 1.8em;
+        padding: 1.3em 1.5em;
+        min-height: 80px;
+      }
+      .navbar {
+        padding: 0.7em 1.2em;
+        font-size: 1.05em;
+      }
+      .property-grid {
+        grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+      }
+    }
+    @media (max-width: 600px) {
+      .header-container {
+        font-size: 1.4em;
+        padding: 1em 1em;
+        min-height: 70px;
+        max-height: 90px;
+      }
+      .navbar ul {
+        flex-direction: column;
+      }
+      .navbar li {
+        margin: 0.4em 0;
+      }
+      .navbar {
+        font-size: 1em;
+        padding: 0.6em 1em;
+      }
+      .property-grid {
+        grid-template-columns: 1fr;
+      }
+      .btn-contact {
+        padding: 0.5em 1em;
+        font-size: 0.95em;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <div class="header-container" title="Compass Reality - Your Trusted Real Estate Partner">
+    <div class="logo-text" aria-label="Compass Reality Logo">
+      🧭 <span class="highlight">Compass Reality</span>
+    </div>
+  </div>
+
+  <nav class="navbar" role="navigation" aria-label="Main navigation">
+    <ul>
+      <li><a href="#" data-section="home" tabindex="0">Home</a></li>
+      <li><a href="#" data-section="residential" tabindex="0">Residential</a></li>
+      <li><a href="#" data-section="commercial" tabindex="0">Commercial</a></li>
+      <li><a href="#" data-section="blog" tabindex="0">Blog</a></li>
+      <li><a href="#" data-section="contact" tabindex="0">Contact</a></li>
+    </ul>
+  </nav>
+
+  <div class="banner-image" id="banner" aria-label="High-rise building">
+    <img src="https://user-gen-media-assets.s3.amazonaws.com/gpt4o_images/38df3015-cc89-4d0d-8cbf-c4b805e9de0d.png" alt="Highrise Building" />
+  </div>
+
+  <div class="main" role="main" tabindex="0">
+
+    <section id="home" class="section active" style="display: block;" tabindex="0">
+      <h1>Welcome to Compass Reality</h1>
+      <p>Your trusted advisor for all residential and commercial real estate needs in India. We provide expert consultancy, tailored solutions, and a client-focused approach.</p>
+
+      <h2 style="margin-top: 3em; color: #263a53;">Featured Listings</h2>
+      <div class="property-grid" style="gap: 1.6em; margin-top: 1em;">
+        <div class="property-card" tabindex="0">
+          <img class="property-image" src="https://images.unsplash.com/photo-1598928506312-e9ed412843b6?auto=format&fit=crop&w=800&q=80" alt="Modern Apartment" />
+          <div class="property-info">
+            <div class="property-title">Kalpataru Vista</div>
+            <div class="property-details">3, 4 BHK Flats in Shiv Road, Sector 128, Noida</div>
+            <div class="property-price">₹ 3.01 Cr - 4.08 Cr</div>
+            <a href="#contact" class="btn-contact" role="button">Enquire Now</a>
+          </div>
+        </div>
+        <div class="property-card" tabindex="0">
+          <img class="property-image" src="https://images.unsplash.com/photo-1504384308090-c894fdcc538d?auto=format&fit=crop&w=800&q=80" alt="Office Space" />
+          <div class="property-info">
+            <div class="property-title">Tech Park Tower</div>
+            <div class="property-details">Premium Office Spaces in Mumbai CBD</div>
+            <div class="property-price">₹ 8.50 Cr - 15.00 Cr</div>
+            <a href="#contact" class="btn-contact" role="button">Enquire Now</a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="residential" class="section" tabindex="0">
+      <h2>Residential Properties For Sale</h2>
+      <div class="property-grid">
+        <div class="property-card" tabindex="0">
+          <img class="property-image" src="https://images.unsplash.com/photo-1598928506312-e9ed412843b6?auto=format&fit=crop&w=800&q=80" alt="Modern Apartment" />
+          <div class="property-info">
+            <div class="property-title">Kalpataru Vista</div>
+            <div class="property-details">3, 4 BHK Flats in Shiv Road, Sector 128, Noida</div>
+            <div class="property-price">₹ 3.01 Cr - 4.08 Cr</div>
+            <a href="#contact" class="btn-contact" role="button">Enquire Now</a>
+          </div>
+        </div>
+        <div class="property-card" tabindex="0">
+          <img class="property-image" src="https://images.unsplash.com/photo-1560448204-e02f11c3d0e2?auto=format&fit=crop&w=800&q=80" alt="Luxury Flat" />
+          <div class="property-info">
+            <div class="property-title">Prestige Lakefront</div>
+            <div class="property-details">Spacious 2 & 3 BHK Villas, Bangalore</div>
+            <div class="property-price">₹ 1.25 Cr - 2.50 Cr</div>
+            <a href="#contact" class="btn-contact" role="button">Enquire Now</a>
+          </div>
+        </div>
+        <div class="property-card" tabindex="0">
+          <img class="property-image" src="https://images.unsplash.com/photo-1600585154356-5f2b3f64cdc2?auto=format&fit=crop&w=800&q=80" alt="Family Home" />
+          <div class="property-info">
+            <div class="property-title">Sunshine Residency</div>
+            <div class="property-details">4 BHK Independent Floors, South Delhi</div>
+            <div class="property-price">₹ 2.75 Cr - 3.50 Cr</div>
+            <a href="#contact" class="btn-contact" role="button">Enquire Now</a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="commercial" class="section" tabindex="0">
+      <h2>Commercial Properties For Sale</h2>
+      <div class="property-grid">
+        <div class="property-card" tabindex="0">
+          <img class="property-image" src="https://images.unsplash.com/photo-1504384308090-c894fdcc538d?auto=format&fit=crop&w=800&q=80" alt="Office Space" />
+          <div class="property-info">
+            <div class="property-title">Tech Park Tower</div>
+            <div class="property-details">Premium Office Spaces in Mumbai CBD</div>
+            <div class="property-price">₹ 8.50 Cr - 15.00 Cr</div>
+            <a href="#contact" class="btn-contact" role="button">Enquire Now</a>
+          </div>
+        </div>
+        <div class="property-card" tabindex="0">
+          <img class="property-image" src="https://images.unsplash.com/photo-1549924231-f129b911e442?auto=format&fit=crop&w=800&q=80" alt="Retail Space" />
+          <div class="property-info">
+            <div class="property-title">Mall Plaza</div>
+            <div class="property-details">Retail Shops in Sector 21, Gurugram</div>
+            <div class="property-price">₹ 5.40 Cr - 7.25 Cr</div>
+            <a href="#contact" class="btn-contact" role="button">Enquire Now</a>
+          </div>
+        </div>
+        <div class="property-card" tabindex="0">
+          <img class="property-image" src="https://images.unsplash.com/photo-1494526585095-c41746248156?auto=format&fit=crop&w=800&q=80" alt="Warehouse" />
+          <div class="property-info">
+            <div class="property-title">Industrial Hub</div>
+            <div class="property-details">Warehouse Space in Pune Industrial Area</div>
+            <div class="property-price">₹ 3.20 Cr - 4.90 Cr</div>
+            <a href="#contact" class="btn-contact" role="button">Enquire Now</a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="blog-section" class="section" tabindex="0">
+      <h2>Latest Blog Posts</h2>
+
+      <div class="blog-post" data-post-id="1">
+        <h3>Real Estate Trends in 2025</h3>
+        <p>The Indian real estate market is evolving rapidly in 2025, with new opportunities arising in both residential and commercial sectors...</p>
+        <div class="blog-interactions">
+          <div tabindex="0" role="button" aria-pressed="false" aria-label="Like post" class="like-btn">👍 <span class="like-count">0</span></div>
+        </div>
+        <div class="comments-section">
+          <label for="comment-input-1">Leave a comment:</label><br/>
+          <textarea id="comment-input-1" class="comment-input" rows="3" placeholder="Write a comment..."></textarea><br/>
+          <button class="btn-add-comment" data-post-id="1">Add Comment</button>
+          <ul class="comments-list" aria-live="polite" aria-relevant="additions"></ul>
+        </div>
+      </div>
+
+      <div class="blog-post" data-post-id="2">
+        <h3>Buying vs Renting: What to Choose?</h3>
+        <p>Weighing the pros and cons of buying versus renting property can help you make the best decision for your lifestyle and financial health...</p>
+        <div class="blog-interactions">
+          <div tabindex="0" role="button" aria-pressed="false" aria-label="Like post" class="like-btn">👍 <span class="like-count">0</span></div>
+        </div>
+        <div class="comments-section">
+          <label for="comment-input-2">Leave a comment:</label><br/>
+          <textarea id="comment-input-2" class="comment-input" rows="3" placeholder="Write a comment..."></textarea><br/>
+          <button class="btn-add-comment" data-post-id="2">Add Comment</button>
+          <ul class="comments-list" aria-live="polite" aria-relevant="additions"></ul>
+        </div>
+      </div>
+
+      <div class="blog-post" data-post-id="3">
+        <h3>Tips for Selling Your Property Quickly</h3>
+        <p>Effective strategies to sell your property quickly include staging, pricing competitively, and marketing extensively...</p>
+        <div class="blog-interactions">
+          <div tabindex="0" role="button" aria-pressed="false" aria-label="Like post" class="like-btn">👍 <span class="like-count">0</span></div>
+        </div>
+        <div class="comments-section">
+          <label for="comment-input-3">Leave a comment:</label><br/>
+          <textarea id="comment-input-3" class="comment-input" rows="3" placeholder="Write a comment..."></textarea><br/>
+          <button class="btn-add-comment" data-post-id="3">Add Comment</button>
+          <ul class="comments-list" aria-live="polite" aria-relevant="additions"></ul>
+        </div>
+      </div>
+    </section>
+
+    <section id="contact" class="section" tabindex="0">
+      <h2>Contact Us</h2>
+      <p><strong>Name:</strong> Manish Chaudhary</p>
+      <p><strong>Address:</strong> 1901 C block Alphathum, Sector 90, Noida 201301</p>
+      <p><strong>Phone:</strong> +91-8587956501</p>
+    </section>
+
+  </div>
+
+  <script>
+    // Show only the requested section, hide all others
+    function showSection(section) {
+      const sectionsToToggle = ['home', 'residential', 'commercial', 'blog-section', 'contact'];
+      sectionsToToggle.forEach(sec => {
+        const el = document.getElementById(sec);
+        if (!el) return;
+        if (sec === section || (sec === 'blog-section' && section === 'blog')) {
+          el.style.display = 'block';
+          el.classList.add('active');
+          el.focus();
+        } else {
+          el.style.display = 'none';
+          el.classList.remove('active');
+        }
+      });
+
+      // Show or hide banner accordingly
+      const banner = document.getElementById('banner');
+      if (section === 'blog' || section === 'contact') {
+        banner.style.display = 'none';
+      } else {
+        banner.style.display = 'block';
+      }
+    }
+
+    // Attach click handlers to nav links
+    document.querySelectorAll('.navbar a[data-section]').forEach(link => {
+      link.addEventListener('click', e => {
+        e.preventDefault();
+        const section = link.getAttribute('data-section');
+        if (section) {
+          showSection(section);
+        }
+      });
+    });
+
+    // Like button functionality with accessibility
+    document.querySelectorAll('.like-btn').forEach(button => {
+      button.addEventListener('click', () => {
+        const liked = button.classList.toggle('liked');
+        button.setAttribute('aria-pressed', liked);
+        const countSpan = button.querySelector('.like-count');
+        let count = parseInt(countSpan.textContent, 10);
+        countSpan.textContent = liked ? count + 1 : count - 1;
+      });
+      button.addEventListener('keydown', e => {
+        if (e.key === 'Enter' || e.key === ' ') {
+          e.preventDefault();
+          button.click();
+        }
+      });
+    });
+
+    // Comment adding mechanism
+    document.querySelectorAll('.btn-add-comment').forEach(button => {
+      button.addEventListener('click', () => {
+        const postId = button.getAttribute('data-post-id');
+        const textarea = document.getElementById('comment-input-' + postId);
+        if (!textarea) return;
+        const val = textarea.value.trim();
+        if (!val) {
+          alert('Please enter a comment.');
+          return;
+        }
+        const commentsList = button.parentElement.querySelector('.comments-list');
+        const newComment = document.createElement('li');
+        newComment.textContent = val;
+        commentsList.appendChild(newComment);
+        textarea.value = '';
+        textarea.focus();
+      });
+    });
+
+    // Show home section by default on page load
+    document.addEventListener('DOMContentLoaded', () => {
+      showSection('home');
+    });
+  </script>
+
+</body>
+</html>
